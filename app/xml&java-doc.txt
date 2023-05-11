@@ -1,0 +1,3167 @@
+xml:
+
+click blue stack icon to select blueprint or design view
+bottom left side lets you switch between design + text view, text view being the raw xml data -- somehow after clicking it once, it is now in the upper right corner of the screen
+android:onClick="onBtnClick"/>
+makes the button bind to a java function in mainactivity, creates it automatically when hovered with mouse
+
+
+
+Java:
+java.utils.Map
+Map<Key,Value> -> like dictionaries in python
+HashMap is also a Java Class
+
+
+
+//only takes capitalized datatypes (non primitive)
+Map<String,String> name = new HashMap<>();
+name.put(((String) key,(String) value);
+name.get((String) key); // --> return value at key
+name.size();
+name.remove(key);
+name.containsKey((String) key);
+name.containsValue((String) value);
+name.clear();
+name.isEmpty();
+name.values(); //returns a Collection<E>
+
+//for each (iterates over every elem)
+//  Type elem listName
+for(List l:   lElem){
+    System.out.println(l); //prints every element
+}
+
+
+public interface NameOfInterface{
+    void x();
+    void y(int arg1,String arg2);
+}
+
+public class X implements NameOfInterface{
+
+public X(String x){
+this.x = x
+    }
+
+//getter, setter, etc
+
+void x(){
+//implement me here
+    }
+
+void y(int x, String y){
+//implement me here
+    }
+}
+
+//in main:
+NameOfInterface i = new X("hi");
+i.x();
+
+
+//abstract classes:
+public abstract class Abstr{
+
+    public abstract void method(int arg1);
+
+    private int arg1;
+
+    public Abstr(int arg1){
+        this.arg1 = arg1;
+    }
+
+}
+
+// --> instances have to implement method, also if Abstr would extend another class, it also needed to be abstract. You can not implement functions other then constructor in abstract classes (or if then its not recommended)
+// class extending abstract with @Override over method implements it, in main, abstract class can be instanciated, lets call the extending class ExtendAbstractClass
+//in main
+Abstr ab = new ExtendAbstractClass();
+
+
+//Threading: (in main)
+
+Thread th = new Thread(new Runnable(){
+    @Override
+    public void run(){
+        //code to be exec in thread
+        Thread.sleep(1000); //thread sleeps for 1 sec, needs exception handling, in here is the worker thread
+    }
+});
+th.start(); //main thread
+
+
+
+//exception handling:
+try{
+    Thread.sleep(1000);
+}catch(InterruptedException e){
+    e.printStackTrace();
+}
+
+
+try{
+    x;
+}catch (Exception e){ //catches any exception
+    sysout "error message";
+    e.printStackTrace(); //prints the recursion stack :)
+}
+
+
+//singleton pattern: makes sure, there is only one instance of this
+
+
+public class Y {
+//also has constructor, just make this private to hinder people from making their own instances
+
+
+private static Y instance;
+
+public static synchronized Y getInstance(){ //synchronized makes this thread safe, in case someone tries to make multiple instances with async threads
+    if (null == instance){
+        instance = new Y();
+        return instance;
+    }else{
+        return instance;
+    }
+}
+}
+
+//in main:
+
+Y hi = Y.getInstance();
+hi.toString(); //basically prints the instance lol, can be @Override in class, to make it print e.g. the contents of the instance instead of the instance id
+
+
+
+
+
+XML:
+
+XML File is like a tree, relativeLayout for now
+centerInParent: centers in parent of child Layout, needs true to be active
+<Name
+    android:
+    tools:
+    ...
+/>
+
+fontSize in sp
+margin in dp#
+android:textStyle="bold|italic"
+
+color: values defined in values/color.xml
+-> Hex code, search on internet for color code
+or give hex directly into textColor xml in layout
+android:id="@+id/txtWelcome" --> should be unique
+
+match_parent in height/width, to match exactly the size of parent
+
+
+press shift twice for search file
+
+
+
+Java:
+//in onCreate:
+//does the same as anonymous classes or setting a listener via xml
+
+
+@Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnHello:
+                System.out.println("hello");
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button btnHello = findViewById(R.id.btnHello);
+        btnHello.setOnClickListener(this);
+
+    }
+
+
+
+
+
+Toast.makeText(this, "", Toast.LENGTH_SHORT).show(); //shows a message, that goes away after a bit of time
+
+
+btn.setListener //look autocomplete, may look for long click, drag click, hovering over, etc...
+
+
+
+XML:
+
+android:lines="4"
+
+accepts 4 lines of input
+
+android:inputType="textPassword" --> different inputs
+
+
+
+
+UI3:
+
+
+checkBoxHarry = findViewById(R.id.checkboxHarry); // checkBoxes yay
+
+
+//anon class
+checkBoxHarry.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    Toast.makeText(MainActivity.this, "You have watched Harry Potter, Yay", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this, "You NEED to watch Harry Potter", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+//Toast msg without box click change
+
+if (!checkBoxHarry.isChecked()){
+            Toast.makeText(MainActivity.this, "You NEED to watch Harry Potter", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(MainActivity.this, "You have watched Harry Potter, Yay", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+XML:
+
+<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moviesRelativeLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harry Potter"
+            android:id="@+id/checkboxHarry"
+            android:checked="true"/>
+
+
+
+Relative Layout can be nested in another Relative Layout, etc... 
+
+
+
+//easier declaration of checkboxes:
+private CheckBox checkBoxHarry, checkBoxMatrix, checkBoxJoker;
+
+
+
+XML:
+RadioButton only allow one of them to be checked, instead of any combination in checkboxes
+
+
+
+ <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moviesRelativeLayout"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:text="Married"
+        android:id="@+id/rbMarried"
+        android:checked="true"/>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moviesRelativeLayout"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:text="Single"
+        android:id="@+id/rbSingle"
+        android:layout_toRightOf="@id/rbMarried"
+        android:checked="true"/>
+
+
+
+
+
+Radio Group groups them lol
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moviesRelativeLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/moviesRelativeLayout"
+            android:text="Married"
+            android:id="@+id/rbMarried"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/moviesRelativeLayout"
+            android:text="Single"
+            android:id="@+id/rbSingle"
+            android:layout_toRightOf="@id/rbMarried"
+            android:layout_marginLeft="15dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/moviesRelativeLayout"
+            android:text="In a Relationship"
+            android:id="@+id/rbinRel"
+            android:layout_toRightOf="@id/rbMarried"
+            android:layout_marginLeft="15dp"/>
+
+
+    </RadioGroup>
+
+
+in Java:
+
+rgMaritalStatus = findViewById(R.id.rgMaritalStatus);
+
+        int checkedButton = rgMaritalStatus.getCheckedRadioButtonId();
+        switch (checkedButton){
+            case R.id.rbMarried:
+                Toast.makeText(MainActivity.this, "Married", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.rbSingle:
+                Toast.makeText(MainActivity.this, "Single", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.rbinRel:
+                Toast.makeText(MainActivity.this, "In a Relationship", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+
+
+
+        rgMaritalStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.rbMarried:
+                        Toast.makeText(MainActivity.this, "Married", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rbSingle:
+                        Toast.makeText(MainActivity.this, "Single", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rbinRel:
+                        Toast.makeText(MainActivity.this, "In a Relationship", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+
+
+
+
+ProgressBar:
+
+        progressBar = findViewById(R.id.progressBar);
+
+        int checkedButton = rgMaritalStatus.getCheckedRadioButtonId();
+        switch (checkedButton){
+            case R.id.rbMarried:
+                Toast.makeText(MainActivity.this, "Married", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.rbSingle:
+                Toast.makeText(MainActivity.this, "Single", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.rbinRel:
+                Toast.makeText(MainActivity.this, "In a Relationship", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+
+
+
+        rgMaritalStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.rbMarried:
+                        Toast.makeText(MainActivity.this, "Married", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rbSingle:
+                        Toast.makeText(MainActivity.this, "Single", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.rbinRel:
+                        Toast.makeText(MainActivity.this, "In a Relationship", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+
+XML:
+
+
+<ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+
+
+Progress Bar, that shows how far the progress has come:
+
+<ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:progress="30"
+        android:max="100"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+
+
+
+
+Progressbar, that moves by 10% every 0.5 secs
+
+progressBar = findViewById(R.id.progressBar);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0; i < 10; i ++){
+                    progressBar.incrementProgressBy(10);
+                    SystemClock.sleep(500);
+                }
+            }
+        });
+        thread.start();
+
+        progressBar.getProgress();
+
+
+in XML just delete the line with progress =30, it'll start at 0
+
+
+
+
+dont wanna loose this:
+
+<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstRelLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:id="@+id/txtLastName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:id="@+id/txtEmail"
+            android:layout_toRightOf="@+id/txtName"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/txtName"
+            android:layout_toRightOf="@+id/txtLastName"
+            android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World"
+        android:layout_below="@+id/firstRelLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtHello"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        android:id="@+id/btnHello"
+        android:layout_below="@+id/txtHello"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
+
+
+
+
+
+
+
+change from Relative to LinearLayout:
+no center or layout below stuff, but either vertically or horizontally ordered items
+
+android:orientation="vertical">
+
+android:layout_weight="2"/> --> this gives the background color 2/x % of the line/row, where x is the sum of the rest of layout_weight 's defined in other Views
+
+
+
+include pictures:
+
+<ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_background"
+        android:id="@+id/myImage"
+        android:layout_centerInParent="true"/>
+
+
+
+
+generate new/select from drawable folder, templates are there under apache license, gives folder of different sized pngs to include into the app
+
+mipmap also available for pasting png's/jpeg (without space/uppercase letters in file name), so put pics in mipmap
+
+change icon of app in manifests -> androidmanifest.xml
+
+
+
+
+
+(DEPRECATED/LEGACY): <ListView
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:layout_marginTop="100dp"
+                             android:id="@+id/citiesList"
+                             android:layout_below="@+id/studentsSpinner"/>
+
+rather use recyclerView
+
+
+Spinner:
+<Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/studentsSpinner"/>
+
+(a dropdown menu for lists)
+
+in Java:
+
+private ListView citiesList;
+    private Spinner studentsSpinner;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        citiesList = findViewById(R.id.citiesList);
+        studentsSpinner = findViewById(R.id.studentsSpinner);
+
+        ArrayList<String> students = new ArrayList<>();
+        students.add("Hi1");
+        students.add("Hi2");
+        students.add("Hi3");
+        students.add("Hi4");
+        students.add("Hi5");
+
+        ArrayAdapter<String> studentsAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                students
+        );
+
+        studentsSpinner.setAdapter(studentsAdapter);
+
+        studentsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, students.get(position) + " Selected", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        final ArrayList<String> cities = new ArrayList<>();
+        cities.add("Zürich");
+        cities.add("New York");
+        cities.add("Berlin");
+        cities.add("Moskau");
+        cities.add("Madrid");
+
+        ArrayAdapter<String> citiesAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                cities
+        );
+
+        citiesList.setAdapter(citiesAdapter);
+
+        citiesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, cities.get(position) + " Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+strings.xml in res/values has app name, static arrays (=lists :))
+
+example of xml array: <string-array name="students">
+                              <item>"Hi1"</item>
+                              <item>"Hi2"</item>
+                              <item>"Hi3"</item>
+                              <item>"Hi4"</item>
+                              <item>"Hi5"</item>
+                          </string-array>
+
+can be used as a source (src) to reference in activity main xml file
+-->
+android:entries="@array/students"
+
+
+instead of static array, now use
+
+Toast.makeText(MainActivity.this, studentsSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+with the stuentsSpinner.get... to handle specific actions
+
+
+
+using strings.xml:
+
+<string name="hello">Hello</string>
+txtHello.setText(getString(R.string.hello));
+
+
+right click values , select new->value ressource file -> name it strings -> next -> select locale, press >>> -> select language/country -> new strings.xml for translation into language
+
+
+styles.xml in values (didnt generate here for some reason)
+for different App Themes, set:
+
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="nameOfColor"> @color/blue</item>
+    ...
+    </style>
+
+    more styles (each one is a theme)
+
+</resources>
+
+android:theme can then be set to a style
+=> in AndroidManifest.xml
+
+Manifest:
+
+has every activity, also .MainActivity
+
+has 4 main components:
+activities, content providers, broadcast receivers, services
+
+
+
+you need to create a directory called menu in res, right click it, then select new -> menu resource file -> name it anything you want, but without xml ending, this will be there automatically
+
+you just created a menu yay
+
+
+example menu:
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Settings"
+        android:id="@+id/settings_menu"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Alarm"
+        android:id="@+id/alarm_menu"
+        android:icon="@drawable/ic_alarm"
+        app:showAsAction="ifRoom"/>
+</menu>
+
+
+
+in JAVA:
+
+go outside of onCreate, press ctrl+o to see every avail override, type onCreateOptionsMenu, press enter
+--> will create the structure of the function
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+
+
+adding onClickListener to the menu icons:
+
+@Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.settings_menu:
+                Toast.makeText(this, "settings selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.alarm_menu:
+                Toast.makeText(this, "alarm selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+
+
+in activity_main.xml file click on the file name upper left corner of preview, (button named activity_main.xml), this will show options to create landscape mode/portrait mode, ect
+you can also create it by r clicking layout, select new, layout resource file, ....
+
+
+control-click multiple views and rightclick, say center horizontally, this centers both at the same time
+
+
+also has ui or night mode
+
+add ressource qualifier for creating any other variation of xml
+e.g. for versions
+
+
+
+trademark xml: create in layout folder via right click with layout resource file, includable in e.g. main activity via:
+
+<include layout="@layout/trademark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+trademark.xml:
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/logo"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developed by Emily at a not existing website"
+        android:layout_toRightOf="@+id/logo"
+        android:layout_marginLeft="10dp"
+        android:textStyle="italic|bold"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"/>
+
+
+</RelativeLayout>
+
+
+
+(a standard layout)
+
+
+
+
+use merge instead of RelativeLayout, then trademark will use whatever is used in include
+
+
+https://m2.material.io/develop/android
+
+
+GOOD WEBSITE FOR DESIGN OF APP
+also guidelines
+
+
+
+for step by step guide of building from dependency/website:
+
+https://m2.material.io/develop/android/docs/getting-started
+
+
+Floating Action Button: round button with logo
+
+
+snackBar: like toast message, but with a clickable action text
+
+
+in JAVA:
+
+private ConstraintLayout parent;
+    private Button btnShowSnackBar;
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    parent = (ConstraintLayout) findViewById(R.id.parent);
+    btnShowSnackBar = (Button) findViewById(R.id.button);
+
+    btnShowSnackBar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            showSnackbar();
+        }
+    });
+
+    }
+
+    private void showSnackbar(){
+        Snackbar.make(parent,"This is a snackbar", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Retry", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this, "Retry Clicked", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setActionTextColor(Color.RED) //getResources().getColor(com.google.android.material.R.color.design_default_color_primary_dark)
+                .setTextColor(Color.YELLOW)
+                .show();
+    }
+
+
+in XML:
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/parent">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Snackbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+needs styles.xml like this to show the stuff in a specific color defined in styles.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.Material3.Light">
+
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorAccent">@color/purple_200</item>
+
+    </style>
+
+</resources>
+
+
+
+
+
+CardView for showing a card lol, no but it has clickable/expandable buttons later
+
+JAVA:
+
+private MaterialCardView cardView;
+
+//... (in onCreate())
+
+    cardView = (MaterialCardView) findViewById(R.id.cardView);
+
+    cardView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(MainActivity.this, "Card Clicked", Toast.LENGTH_SHORT).show();
+        }
+    });
+
+
+XML:
+
+<com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Hello"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:id="@+id/textHello"/>
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textHello"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+as you see, you can define your own Layout in the cardView
+
+
+
+
+
+ok...hold on, bigger topic: RECYCLERVIEW:
+
+
+activity_main.xml:
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="10dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/contacsRecView"/>
+
+</RelativeLayout>
+
+
+
+this also needs a new layout ressource file called contacts_list_item.xml:
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Contact Name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtName"
+            android:layout_marginTop="7dp"
+            android:text="Contact Email"
+            android:textStyle="italic" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/txtEmail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_launcher_background" />
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+
+
+//MainActivity.java (btw to autocomplete stuff like Constructor, getter/setter, toString, do this with alt+einfg, or try ctrl+enter, or ctrl+space :)):
+
+
+
+
+public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView contactsRecView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    contactsRecView = findViewById(R.id.contacsRecView);
+    ArrayList<Contact> contacts = new ArrayList<>();
+    contacts.add(new Contact("hi","example1","https://thispersondoesnotexist.xyz/img/4298.jpg"));
+    contacts.add(new Contact("hi1","example2","https://thispersondoesnotexist.xyz/img/4276.jpg"));
+    contacts.add(new Contact("hi2","example3","https://thispersondoesnotexist.xyz/img/4122.jpg"));
+    contacts.add(new Contact("hi3","example4","https://thispersondoesnotexist.xyz/img/3880.jpg"));
+    contacts.add(new Contact("hi4","example5","https://thispersondoesnotexist.xyz/img/4214.jpg"));
+
+    ContactsRecViewAdapter adapter = new ContactsRecViewAdapter();
+    adapter.setContacts(contacts);
+
+    contactsRecView.setAdapter(adapter);
+    contactsRecView.setLayoutManager(new LinearLayoutManager(this)); //after this, add ,LinearLayoutManager.HORIZONTAL, false) to have it horizontally, linear is prefered to the line below
+    //contactsRecView.setLayoutManager(new GridLayoutManager(this,2));
+
+    }
+}
+
+
+
+
+//Create a new class, call it ContactsRecViewAdapter.java (in the same folder as MainActivity):
+
+
+package de.example.recyclerview;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class ContactsRecViewAdapter extends RecyclerView.Adapter<ContactsRecViewAdapter.ViewHolder>{
+
+    private ArrayList<Contact> contacts = new ArrayList<>();
+
+    private Context context;
+
+    public ContactsRecViewAdapter(Context context) {
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //ViewGroup multiplexes between the different layouts (View types)
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contacts_list_item, parent, false); //pass null instead of parent,false , if you are not sure to which parent to pass the view/layout
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) { //with or without final, this is shown as an error, though compiles without
+        holder.txtName.setText(contacts.get(position).getName());
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context, contacts.get(position).getName() + " Selected", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public int getItemCount() {
+        return contacts.size();
+    }
+
+    public void setContacts(ArrayList<Contact> contacts) {
+        this.contacts = contacts;
+        //notifyDataSetChanged(); //when using internetDatabase
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        private TextView txtName;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            txtName = itemView.findViewById(R.id.txtName);
+            parent = itemView.findViewById(R.id.parent);
+
+        }
+    }
+}
+
+
+
+
+//finally make Contact.java, also in the same folder (new Java Class file):
+
+package de.example.recyclerview;
+
+public class Contact {
+    private  String name;
+    private String email;
+    private String imageUrl;
+
+    public Contact(String name, String email, String imageUrl) {
+        this.name = name;
+        this.email = email;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
+}
+
+
+
+
+
+
+// include a cardView, using dependencies:
+//to put in build.gradle (Module: x.app)
+//when searching for dependencies, make sure to search for androidx dependencies
+
+dependencies{
+    implementation "androidx.cardview:cardview:1.0.0"
+}
+
+
+
+
+
+
+if changing visibility of a cardview/relative layout, you can set a transition animation with
+TransitionManager.beginDelayedTransition(//context like holder.parent);
+
+
+using recyclerview with multiple expandable cardviews recommends a use of linearlayoutmanager as setLayoutManager of the recyclerView
+the adapter itself is a java class made by yourself handling a prototype, set with your RecView.setAdapter(instance of the adapter class);
+
+ScrollView makes content scrollable if out of page
+
+
+to give a new activity data from the old activity, when making the intent, use intent.putExtra("key", value); //--> like a dict
+//-->
+// in new Activity:
+Intent intent = getIntent();
+if (null != intent){
+    ... = intent.getExtra(key,defaultValue);
+}
+//defaultValue is set, if nothing is found for set key, or getExtra fails
+
+--> may return an id, to use in utils class to get the object by said id
+--> id should be public static
+
+
+
+disable a button with:
+
+button.setEnabled(false);
+
+
+
+btw this is the Utils.java:
+
+package de.example.challengeregister;
+
+import java.util.ArrayList;
+
+public class Utils {
+
+    private static Utils instance;
+
+    private static ArrayList<String> allStrings;
+    private static ArrayList<String> alreadyShowStrings;
+    private static ArrayList<String> currentlyReadingString;
+    private static ArrayList<String> favouriteString;
+
+
+    private Utils() {
+        if(null == allStrings){
+            allStrings = new ArrayList<>();
+            initData();
+        }
+
+        if (null == alreadyShowStrings){
+            alreadyShowStrings = new ArrayList<>();
+        }
+
+        if (null == currentlyReadingString){
+            currentlyReadingString = new ArrayList<>();
+        }
+
+        if (null == favouriteString){
+            favouriteString = new ArrayList<>();
+        }
+    }
+
+    private void initData() {
+        allStrings.add("Hi1");
+        allStrings.add("Hi2");
+        allStrings.add("Hi3");
+        allStrings.add("Hi4");
+    }
+
+    public static Utils getInstance() {
+        if (null == instance) {
+            instance = new Utils();
+        }
+        return instance;
+    }
+
+    public static ArrayList<String> getAllStrings() {
+        return allStrings;
+    }
+
+    public static ArrayList<String> getAlreadyShowStrings() {
+        return alreadyShowStrings;
+    }
+
+    public static ArrayList<String> getCurrentlyReadingString() {
+        return currentlyReadingString;
+    }
+
+    public static ArrayList<String> getFavouriteString() {
+        return favouriteString;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+and here is registerSuccessActivity.java:
+
+package de.example.challengeregister;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+public class registerSuccessActivity extends AppCompatActivity {
+
+    TextView tv1,tv2,tv3,tv4;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register_success);
+
+        Utils ut = Utils.getInstance();
+
+        ArrayList<String> st1 = ut.getAllStrings();
+
+        tv1 = (TextView) findViewById(R.id.tv1);
+        tv2 = (TextView) findViewById(R.id.tv2);
+        tv3 = (TextView) findViewById(R.id.tv3);
+        tv4 = (TextView) findViewById(R.id.tv4);
+
+
+        tv1.setText(st1.get(0));
+        tv2.setText(st1.get(1));
+        tv3.setText(st1.get(2));
+        tv4.setText(st1.get(3));
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+ctrl+o press in some activity shows you all overrideable functions, i.e. onBackPressed(), which handles, when an activity is called via the back button.
+-->
+
+Java:
+
+@Override
+public void onBackPressed(){
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+}
+
+
+
+activities are put in backStack after called, so will lifo be called when pressing back, can be avoided with onBackPressed() override by the line:
+intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//actually, this line also clears the backStack, so this will remove any back button functionality in your app after this was called
+
+
+shift+f6 to refactor variables highlighted currently
+
+
+
+
+
+
+making a are you sure dialogue to a button press (in onClick):
+
+AlertDialog.Builder builder = new AlertDialog.Builder(mContext); //(in main activity this is MainActivity.this)
+builder.setTitle(getString(R.string.app_name));
+builder.setMessage(Are you sure, you want to ...?);
+builder.setPositiveButton("Yes", new DialogInterface.onClickListener(){... //notifyDataSetChanged(); ...});
+builder.setNegativeButton("No", //same as above, just different implement);
+builder.create().show();
+
+//many options after builder. --> setIcon , setCancelable, ...
+
+
+
+
+WebView:
+
+<WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView1"/>
+
+
+
+in WebViewActivity:
+
+private WebView webView;
+
+//in oncreate:
+webView = findViewById(R.id.webView1);
+webView.loadUrl("https://google.com/")
+
+access/permission to use the internet over manifest.xml:
+<uses-permission
+        android:name="android.permission.INTERNET"/>
+
+
+
+
+
+this opens a new browser tab, but you can also have an in-app webView:
+
+        webView = (WebView) findViewById(R.id.webView1);
+        webView.loadUrl("https://google.com/");
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true); //might be a security risk to activate this
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(webView.canGoBack()){
+            webView.goBack();
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+
+
+
+in case of a special website based on where the activity was called from:
+
+Intent intent = getIntent();
+        if(null != intent){
+            String url = intent.getStringExtra("url");
+            webView = (WebView) findViewById(R.id.webView1);
+            webView.loadUrl("https://google.com/");
+            webView.setWebViewClient(new WebViewClient());
+            webView.getSettings().setJavaScriptEnabled(true); //might be a security risk to activate this
+        }
+
+
+
+
+
+Animations:
+rclick res, new -> Android ressource directory -> select anim as type, click ok
+
+rclick anim, new -> animation ressource file, makes a new xml file for a specific animation
+
+instead of set, we use:
+
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="-100%p"
+        android:toXDelta="0%p"
+        android:duration="1000">
+
+</translate>
+
+fromXDelta is the starting X coord, also for Y settable, 0 is the pixel coord, 0% is specific to the element it is in, 0%p is relative to parent layout, can also be -100%p e.g.
+duration needs to be typed out
+
+
+in JAVA:
+
+//in onCreate, the first command after the auto gened should be:
+
+overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+//for the in ChallengeRegister created animations slide_in and slide_out
+//to make a functional back button animation, use this (outside of onCreate):
+
+@Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
+    }
+
+
+to have this as the standard transition:
+
+make styles.xml:
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.Light">
+
+        <item name="android:windowAnimationStyle">@style/CustomAnimation</item>
+
+    </style>
+
+
+    <style name="CustomAnimation" parent="android:style/Animation.Activity">
+
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_out</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_in</item>
+
+    </style>
+</resources>
+
+
+
+
+
+(this works only, if styles.xml already existed in the project, which it doesn't by default on my end Q_Q)
+
+
+
+research MotionLayout, new technology for animations by android it seems like
+
+
+
+
+
+
+
+
+
+
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+this in onCreate makes a back arrow, that can be set to take you to the previous activity like this:
+
+@Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+//this acts as backButton pressed, but you can also create an intent to take a user to a specific activity of course
+
+
+
+
+
+
+
+add to strings.xml:
+
+<string name="web_browser">Web Browser</string>
+
+
+in manifest.xml:
+
+<activity
+            android:name=".registerSuccessActivity"
+            android:label="@string/web_browser"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+
+
+
+(added the label line, everything else was already there)
+
+
+
+
+
+implementation 'com.google.code.gson:gson:2.8.6'
+adding this to the dependencies in build.grade (... .app) actually works with syncing
+
+
+--> saving stuff in files (de-/serialization):
+just the whole class, commented, what changes are important, what todos are also marked
+
+package de.example.challengeregister;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+public class Utils {
+
+    private static final String ALL_BOOKS_KEY = "all_books";
+
+    private static Utils instance;
+
+    private SharedPreferences sharedPreferences;
+
+    private static ArrayList<String> allStrings; //no need for this static var anymore, also the app now has a savestate :)
+    private static ArrayList<String> alreadyShowStrings;
+    private static ArrayList<String> currentlyReadingString;
+    private static ArrayList<String> favouriteString;
+
+
+    private Utils(Context context) {
+
+
+
+        sharedPreferences = context.getSharedPreferences("alternate_db",Context.MODE_PRIVATE);
+
+        if(null == getAllStrings()){
+            initData();
+        }
+
+        if (null == alreadyShowStrings){ //use getAlreadyShowStrings
+            alreadyShowStrings = new ArrayList<>(); //instead of using a static arrayList (delete this line from each if(null == ...)), gson is taking care :D
+        }
+
+        if (null == currentlyReadingString){//use getCurrentlyReadingString
+            currentlyReadingString = new ArrayList<>();
+        }
+
+        if (null == favouriteString){//use getFavouriteString
+            favouriteString = new ArrayList<>();
+        }
+    }
+
+    private void initData() {
+
+        ArrayList<String> strings = new ArrayList<>();
+
+        strings.add("Hi1");
+        strings.add("Hi2");
+        strings.add("Hi3");
+        strings.add("Hi4");
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        editor.putString(ALL_BOOKS_KEY,gson.toJson(strings));
+        editor.commit();
+
+    }
+
+    public static Utils getInstance(Context context) {
+        if (null == instance) {
+            instance = new Utils(context);
+        }
+        return instance;
+    }
+
+    public ArrayList<String> getAllStrings() {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>(){}.getType();
+        ArrayList<String> strings = gson.fromJson(sharedPreferences.getString(ALL_BOOKS_KEY, null), type);
+
+        return strings;
+    }
+
+    public static ArrayList<String> getAlreadyShowStrings() {
+        return alreadyShowStrings;
+    } //change these functions similar to getAllStrings(), and make this non static, gson is open source, so i guess, google wont be spying on that data right?
+
+    public static ArrayList<String> getCurrentlyReadingString() {
+        return currentlyReadingString;
+    }
+
+    public static ArrayList<String> getFavouriteString() {
+        return favouriteString;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ViewPager: Sidescrollable Element for xml layout, or even pages, needs pagerAdapter
+
+--> CustomPagerAdapter(Context context) // <-- own class for adapter
+--> instantiateItem (inflates the items), isViewFromObject (check if object belongs to given pos)
+, getPageTitle (gets the current page title, which is needed in PagerAdapter)
+
+
+ViewPager vp = findViewById(R.id.id_of_viewpager);
+vp.setAdapter(new CustomPagerAdapter(this));
+
+
+make enum ModelObject{
+
+RED(R.string.red, R.layout.view_red)
+BLUE(...)
+GREEN(...)
+
+private int mTitleResId;
+private int mLayoutResId;
+
+ModelObject(int titleRes, int layoutResId){
+    mTitleRedId = titleResId;
+    mLayoutResId = layoutResId;
+}
+
+//getters here
+
+
+}
+
+
+
+--> class (extends PagerAdapter):
+//also include overrides for getCount() and isViewFromObject(@NonNull View view, @NonNull Object object)
+private Context mContext;
+
+public CustomPagerAdapter(Context mContext){
+    this.mContext = mContext;
+}
+//this needs the enum
+public Object instantiateItem(@NonNull ViewGroup container, int position){
+    ModelObject modelObject = ModelObject.values()[position];
+    LayoutInflater inflater = LayoutInflater.from(mContext);
+
+    ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), container, false);
+
+    container.addView(layout);
+    return layout;
+}
+
+also override destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object ){
+    container.removeView((View) object);
+}
+
+getCount:
+return ModelObject.values().length;
+
+isViewFromObject:
+return view == object;
+
+public CharSequence getPageTitle(int position){
+    ModelObject customPagerEnum = ModelObject.values().[position];
+    return mContext.getString(customPagerEnum.getmTitleResId());
+}
+
+
+
+SQLite Database may also be used to store user data on the phone (doesnt need its own sql server or shit)
+firebase/room database?
+retrofit?
+rest api?
+
+
+how to include audio/video in application
+how to schedule alarms
+
+
+
+
+
+
+
+
+
+
+You can go back to the previous activity by just calling finish() in the activity you are on. Note any code after the finish() call will be run - you can just do a return after calling finish() to fix this.
+
+If you want to return results to activity one then when starting activity two you need:
+
+startActivityForResults(myIntent, MY_REQUEST_CODE);
+Inside your called activity you can then get the Intent from the onCreate() parameter or used
+
+getIntent();
+To set return a result to activity one then in activity two do
+
+setResult(Activity.RESULT_OK, MyIntentToReturn);
+If you have no intent to return then just say
+
+setResult(Activity.RESULT_OK);
+If the the activity has bad results you can use Activity.RESULT_CANCELED (this is used by default). Then in activity one you do
+
+onActivityResult(int requestCode, int resultCode, Intent data) {
+    // Handle the logic for the requestCode, resultCode and data returned...
+}
+To finish activity two use the same methods with finish() as described above with your results already set.
+
+
+
+
+
+
+
+
+
+fun stuff working with image filters :D
+
+
+private ImageView imgQR;
+
+
+
+ @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_qrmethod_set);
+
+        /*btnAddNewQRBar = (Button) findViewById(R.id.btnAddQRBarCode);*/
+
+        /*btnAddNewQRBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra("foto",android.provider.MediaStore.EXTRA_OUTPUT);
+
+                startActivityForResult(intent,REQUEST_FROM_CAMERA);
+            }
+        });
+
+
+*/
+
+        imgQR = (ImageView) findViewById(R.id.imgTest);
+        btnGreyScale = (Button) findViewById(R.id.btnGrayScale);
+        btnNoiseReduction = (Button) findViewById(R.id.btnNoise);
+        btnGradientSobel = (Button) findViewById(R.id.btnGradientSobel);
+        btnOriginal = (Button) findViewById(R.id.btnOriginalQR);
+
+
+        imgQR.setImageResource(R.drawable.qrcode1);
+
+
+        btnOriginal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgQR.setImageResource(R.drawable.qrcode1);
+            }
+        });
+
+        btnGreyScale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                imgQR = (ImageView) imgQR.findViewById(R.id.imgTest);;
+                Bitmap bm = ((BitmapDrawable)imgQR.getDrawable()).getBitmap();
+                Bitmap newBm = createContrast(bm, 50);
+                imgQR.setImageBitmap(newBm);
+
+
+            }
+        });
+
+        btnNoiseReduction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                imgQR = (ImageView) imgQR.findViewById(R.id.imgTest);;
+                Bitmap bm = ((BitmapDrawable)imgQR.getDrawable()).getBitmap();
+                int[][] kernelGaussian = {{1,3,1},{3,5,3},{1,3,1}};
+                Bitmap newBm = applyKernel(kernelGaussian, bm);
+                imgQR.setImageBitmap(newBm);
+            }
+        });
+
+        btnGradientSobel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                imgQR = (ImageView) imgQR.findViewById(R.id.imgTest);;
+                Bitmap bm = ((BitmapDrawable)imgQR.getDrawable()).getBitmap();
+                int[][] kernelVert = {{1,0,-1},{2,0,-2},{1,0,-1}};
+                Bitmap newBm = applyKernel(kernelVert, bm);
+                int[][] kernelHor = {{1,2,1},{0,0,0},{-1,-2,-1}};
+                newBm = applyKernel(kernelHor, bm);
+                imgQR.setImageBitmap(newBm);
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        /*if(requestCode == REQUEST_FROM_CAMERA && resultCode == RESULT_OK){
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            DetectQRCode det = new DetectQRCode();
+            int[] dataAboutQR = det.detect(photo);
+            if (dataAboutQR.length > 1){
+                editLabel.setHint((CharSequence) photo.toString()); //TODO: read qr from foto
+
+            }
+        }*/
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+
+
+
+
+
+
+
+
+Layout btw:
+
+
+
+<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="500dp"
+                    android:id="@+id/imgTest"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="original pic"
+                    android:id="@+id/btnOriginalQR"
+                    android:layout_below="@id/imgTest"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="grayscale"
+                    android:id="@+id/btnGrayScale"
+                    android:layout_below="@+id/btnOriginalQR"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Noise reduction"
+                    android:id="@+id/btnNoise"
+                    android:layout_below="@+id/btnGrayScale"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gradient/Sobel"
+                    android:id="@+id/btnGradientSobel"
+                    android:layout_below="@id/btnNoise"/>
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+ReadQRCode.java:
+
+
+
+
+
+
+package com.example.alarm;
+
+import java.util.Arrays;
+
+public class ReadQRCode {
+
+    private boolean isBlack;
+
+
+
+    public int[] readQR(int[][] bitMap, int size, int pxPerTile, int startX, int startY, boolean isDiag, int rotation){
+
+        int[][] compact = cropQRCode(bitMap, size, pxPerTile);
+        startX /= pxPerTile;
+        startY /= pxPerTile;
+
+        compact = rotateUpRight(compact, rotation);
+        int[][] alignmentPattern = findAlignmentPattern(compact);
+
+
+
+/*      if(startX != size){
+
+        }
+        if(startY != size){
+
+      }*/
+
+        if(!isDiag){ //isDiag from DetectQRCode.class
+
+
+
+        }else{
+
+        }
+        return new int[]{};
+    }
+
+    private int[][] rotateUpRight(int[][] compact, int rotation) {
+
+        if(rotation == 90){
+            compact = transpose(compact);
+            reverseRowsInPlace(compact);
+        } else if (rotation == -90) {
+            compact = transpose(compact);
+            reverseColumnsInPlace(compact);
+        } else if (rotation == 180) {
+            compact = transpose(compact);
+        }
+        return compact;
+
+    }
+
+    public int[][] transpose(int[][] matrix) {
+        int[][] temp = new int[matrix.length][matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                temp[j][i] = matrix[i][j];
+            }
+        }
+        matrix = temp;
+        return matrix;
+    }
+
+    public static void reverseColumnsInPlace(int[][] matrix){
+        for(int col = 0;col < matrix[0].length; col++){
+            for(int row = 0; row < matrix.length/2; row++) {
+                int temp = matrix[row][col];
+                matrix[row][col] = matrix[matrix.length - row - 1][col];
+                matrix[matrix.length - row - 1][col] = temp;
+            }
+        }
+    }
+
+    public static void reverseRowsInPlace(int[][] matrix){
+
+        for(int row = 0; row < matrix.length; row++){
+            for(int col = 0; col < matrix[row].length / 2; col++) {
+                int temp = matrix[row][col];
+                matrix[row][col] = matrix[row][matrix[row].length - col - 1];
+                matrix[row][matrix[row].length - col - 1] = temp;
+            }
+        }
+    }
+
+
+
+
+
+
+    private int[][] findAlignmentPattern(int[][] compact) {
+
+        int[][] alignmentCoords = new int[46][2];
+        int numOfFound = 0;
+
+        for(int i = 0; i < compact.length; i++){
+            for(int j = 0; j < compact[i].length; j++){
+                if(i-2 >0 && i+2 < compact.length && j-2 > 0 && j+2 < compact[i].length){ //pattern not out of bounds
+                    if(compact[i][j] == 1 && compact[i+1][j] == 0 && compact[i+2][j] ==  1 && compact[i-1][j] == 0 && compact[i-2][j] == 1 && compact[i][j+1] == 0 && compact[i][j+2] == 1 && compact[i][j-1] == 0 && compact[i][j-2] == 1){
+                        if(compact[i+1][j+1] == 0 && compact[i+1][j-1] == 0 && compact[i-1][j+1] == 0 && compact[i-1][j-1] == 0 &&
+                           compact[i-2][j-1] == 1 && compact[i-2][j-2] == 1 && compact[i-2][j+1] == 1 && compact[i-2][j+2] == 1 &&
+                           compact[i-1][j+2] == 1 && compact[i-1][j-2] == 1 && compact[i+1][j+2] == 1 && compact[i+1][j-2] == 1 &&
+                           compact[i+2][j-2] == 1 && compact[i+2][j-1] == 1 && compact[i+2][j+1] == 1 && compact[i+2][j+2] == 1){
+                            //pattern confirmed
+                            alignmentCoords[numOfFound][0] = i;
+                            alignmentCoords[numOfFound][1] = j;
+                            numOfFound++;
+
+
+                        }
+                    }
+                }
+            }
+        }
+
+        int[][] newAlignmentCoords = new int[numOfFound][2];
+        int iter = 0;
+        for(int[] intl : alignmentCoords){
+            for(int in : intl){
+                newAlignmentCoords[iter/2][iter%2] = in;
+            }
+        }
+        return newAlignmentCoords;
+
+    }
+
+    public int[][] cropQRCode(int[][] bitMap, int size, int pxPerTile){
+
+        boolean[] booleansVertical = new boolean[bitMap.length];
+        boolean[] booleansHorizontal = new boolean[bitMap[bitMap.length/2].length];
+        int posVertical = 0;
+        int trueCountVertical = 0;
+        int posHorizontal = 0;
+        int trueCountHorizontal = 0;
+
+
+        for (int[] bitM: bitMap ) {
+            int[] minusOnes = new int[bitM.length];
+            Arrays.fill(minusOnes,-1);
+
+            if (Arrays.equals(bitM, minusOnes)){
+                booleansVertical[posVertical] = false;
+            }else{
+                booleansVertical[posVertical] = true;
+                trueCountVertical++;
+            }
+            posVertical++;
+        }
+
+        for (int[] bitM: bitMap ) {
+            int[] minusOnes = new int[bitM.length];
+            Arrays.fill(minusOnes,-1);
+
+            if (Arrays.equals(bitM, minusOnes)){
+                booleansHorizontal[posHorizontal] = false;
+            }else{
+                booleansHorizontal[posHorizontal] = true;
+                trueCountHorizontal++;
+            }
+            posHorizontal++;
+        }
+
+
+
+
+        int[][] newArr = new int[trueCountVertical][trueCountHorizontal];
+        int skippedX = 0;
+        int skippedY = 0;
+
+        for(int i = 0; i < trueCountVertical ;i++){
+            for (int j = 0; j < trueCountHorizontal; j++){
+                if(booleansVertical[i] || booleansHorizontal[j]) {
+                    newArr[i][j] = bitMap[i+skippedX][j+skippedY];
+                }else{
+                    skippedX++;
+                    skippedY++;
+                }
+            }
+        }
+
+        int[][] compactArr = new int[size][size];
+
+        for(int i = 0; i < size; i++){ //TODO: doesn't this throw away lines of the qr code, because it uses white/black pixels as reference, for where to crop? so revisit this later...
+            for(int j = 0; j < size; j++){
+                if(isWhite(getArr(newArr, i, j, pxPerTile), size*size)){ //if more than 80% of tile are black or white, set accordingly
+                    compactArr[i][j] = 0;
+                }else if(this.isBlack){
+                    compactArr[i][j] = 1;   //counter intuitive, but a black field corresponds to a 1, a white one for a 0...who tf thought that would be a good idea lmfao
+                }else {
+                    compactArr[i][j] = -1; //TODO: handle invalid tile (white-black ratio is not >=0.8 to any side)
+                }
+            }
+        }
+
+        return compactArr;
+
+    }
+
+
+
+
+    private boolean isWhite(int[][] arr, int c) {
+        int countWhite = 0;
+        int countBlack = 0;
+        for(int[] ar: arr){
+            for(int a: ar){
+                if (a == 0){
+                    countBlack++;
+                } else if (a == 1) {
+                    countWhite++;
+                }
+            }
+        }
+        if(((float)countWhite/(float)c) > 0.8){
+            return true;
+        } else if ((float)countBlack/(float) c > 0.8) {
+            this.isBlack = true;
+            return  false;
+        }else{
+            this.isBlack = false;
+            return false;
+        }
+
+    }
+
+    private int[][] getArr(int[][] newArr, int i, int j, int pxPerTile) {
+
+        int[][] tile = new int[pxPerTile][pxPerTile];
+
+        for(int k = 0; k < (i+1)*pxPerTile; k++){
+            if ((j + 1) * pxPerTile >= 0)
+                System.arraycopy(newArr[(i * pxPerTile) + k], (j * pxPerTile), tile[k], 0, (j + 1) * pxPerTile);
+        }
+
+        return tile;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DetectQRCode.java:
+
+
+
+package com.example.alarm;
+
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
+
+import java.util.Arrays;
+
+
+public class DetectQRCode {
+
+    boolean diag = false;
+    private int[][] blackWhiteMapPicture;
+    private int border;
+    private int firstBorderBlack;
+    private int secondBorderWhite;
+    private int thirdBorderBlack;
+    private int fourthBorderWhite;
+    private int startX;
+    private int startY;
+    private int qrSize;
+    private int tileSize;
+    private int rotation;
+
+    //(example qr code)
+    //squares are 7*151x7*151pixels big (plus 3 outlines so 154), + 1 pixel black outline (1pixel border (grey)outtermost only horizontal has other gray tone than vertical (or might even be different on all sides)
+    //all squares have outlines
+    //(1px outline inbetween each, and outside)151pixel corner black, 151 px same shape, but inner & white, 3*151 x 3*151 px² square black
+    //x 151 + outline fields inbetween corners, corners are up left, up right, down left, also have white outline 9x9 151px's, outside of white w/o outline
+    // 8,85 megapixel at most per pic, better to downscale? I actually don't think, because if we downscale, we might aswell just scan the whole image first
+    //how to work with rotation/camera position/perspective?
+
+
+    public DetectQRCode() {
+    }
+
+
+
+
+    public static Bitmap createContrast(Bitmap src, double value) {
+    // image size
+        int width = src.getWidth();
+        int height = src.getHeight();
+    // create output bitmap
+        Bitmap bmOut = Bitmap.createBitmap(width, height, src.getConfig());
+    // color information
+        int A, R, G, B;
+        int pixel;
+    // get contrast value
+        double contrast = Math.pow((100 + value) / 100, 2);
+
+    // scan through all pixels
+        for(int x = 0; x < width; ++x) {
+            for(int y = 0; y < height; ++y) {
+                // get pixel color
+                pixel = src.getPixel(x, y);
+                A = Color.alpha(pixel);
+                // apply filter contrast for every channel R, G, B
+                R = Color.red(pixel);
+                R = (int)(((((R / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
+                if(R < 0) { R = 0; }
+                else if(R > 255) { R = 255; }
+
+                G = Color.red(pixel);
+                G = (int)(((((G / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
+                if(G < 0) { G = 0; }
+                else if(G > 255) { G = 255; }
+
+                B = Color.red(pixel);
+                B = (int)(((((B / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
+                if(B < 0) { B = 0; }
+                else if(B > 255) { B = 255; }
+
+                // set new pixel color to output bitmap
+                bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+            }
+        }
+
+        return bmOut;
+    }
+
+
+    public static Bitmap applyKernel(int[][] kernel, Bitmap bm){
+
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+
+        Bitmap bmOut = Bitmap.createBitmap(width-2, height-2, bm.getConfig());
+        int[][] pixel;
+
+        for(int x = 1; x < width-1; ++x) {
+            for (int y = 1; y < height-1; ++y) {
+
+                pixel = new int[][]{{bm.getPixel(x - 1, y - 1), bm.getPixel(x, y - 1), bm.getPixel(x + 1, y - 1)},
+                        {bm.getPixel(x, y - 1), bm.getPixel(x, y), bm.getPixel(x, y + 1)},
+                        {bm.getPixel(x + 1, y - 1), bm.getPixel(x + 1, y), bm.getPixel(x + 1, y + 1)}};
+
+                bmOut.setPixel(x-1,y-1, colorTransform(pixel,kernel));
+            }
+        }
+
+
+        return bmOut;
+    }
+
+    private static int colorTransform(int[][] pixel, int[][] kernel) {
+
+        int calc = 0;
+        for(int i = 0; i < 3 ; i++){
+            for(int j = 0; j < 3; j++){
+                calc += pixel[i][j]*kernel[i][j];
+            }
+        }
+        return calc;
+    }
+
+
+    public int[][] getBlackWhiteMapPicture() {
+        return blackWhiteMapPicture;
+    }
+
+    public int[] detect(Bitmap bitmap){
+        int[] pixels = new int[bitmap.getHeight()*bitmap.getWidth()+bitmap.getHeight()];
+        Arrays.fill(pixels,-1);
+        bitmap.getPixels(pixels, 0, 1, 0, 0, bitmap.getWidth(), bitmap.getHeight()); //pixels is now set to packed ints represeting a Color, each row is separated with one entry that is left empty in between
+
+        int[][] arr = new int[bitmap.getHeight()][];
+
+        for(int i = 0; i < pixels.length; i++){ //populate arr with 1,0 for black/white pixels, -1 for colored
+            int p = pixels[i];
+
+            if(p == -1){
+
+                arr[i/bitmap.getWidth()][i%bitmap.getWidth()] = -1;
+
+            }else if (Color.red(p) >= 33 && Color.red(p) < 190 && Color.blue(p) > 30 && Color.blue(p) < 190 && Color.green(p) >= 33 && Color.green(p) < 190) {
+
+                arr[i/bitmap.getWidth()][i%bitmap.getWidth()] = -1;
+
+            }else{
+                if(Color.red(p) < 33) {
+                    arr[i / bitmap.getWidth()][i % bitmap.getWidth()] = 0;
+                }else{
+                    arr[i / bitmap.getWidth()][i % bitmap.getWidth()] = 1;
+                }
+            }
+        }
+        this.blackWhiteMapPicture = arr;
+        //.setColorSpace(ColorSpace colorspace)
+        //.getPixel(int x, int y) or .getPixels(int[] pixels, int offset, int stride, int x, int y, int width, int height) , seconds gets an array of ints (stored to pixels[])...but how is this 2 dimensional, or how is the
+        //picture being 2d displayed in 1d? separator? --> stride sets how many positions in the pixels array are skipped on reading in a new line
+        //.getWidth, .get(Scaled?)Height()
+        if(isQRInArr(arr)) {
+            int[] o = new int[8];
+            o[0] = 1; //(0/1) for if qr is in pic; (int) for X start reading coord; (int) for Y start reading coord; (int) for height of pic; (int) for width of pic; (int) for tile distance of qr pos markers (qr size essentially); (int) for num of pixels for one tile; (int) for 0/1 false/true of isDiagQRCode
+            o[1] = this.startX;
+            o[2] = this.startY;
+            o[3] = bitmap.getHeight();
+            o[4] = bitmap.getWidth();
+            o[5] = this.qrSize;
+            o[6] = this.tileSize;
+            if(this.diag){
+                o[7] = 1;
+            }else{
+                o[7] = 0;
+            }
+            return o;
+        }else{
+            return new int[1];
+        }
+
+    }
+
+
+    public boolean detect_horizontal(int[][] bitMap, int startstart, int start, int stopstop, int stop){ //startstart & start are starting indexes to search at for finding a qr code
+        this.blackWhiteMapPicture = bitMap;
+        border = 0;
+        int count = 0;
+        int lastChance = bitMap[bitMap.length/2].length/1000;
+
+        for (int v = startstart; v < bitMap.length; v++) {
+
+            if(v > stopstop){
+                return false;
+            }
+
+            int[] bitM = bitMap[v];
+            boolean endOfLine = false;
+            boolean isThisTileSizeSet = false;
+
+            for ( int w = start; w < bitM.length; w++) {
+
+                if(w > stop){
+                    return false;
+                }
+
+                int bit = bitM[w];
+                boolean foundLine = bit == 0;
+
+                if (!endOfLine) {
+
+                    if (count < 40) {
+                        count++;
+
+                        if (!foundLine) {
+                            lastChance --;
+
+                            if (lastChance < 0){
+                                count = 0;
+                                lastChance = bitMap[v].length;
+                            }
+                        }
+
+
+                    } else if (foundLine) {
+                        count++;
+
+
+                    } else {
+                        if (!isThisTileSizeSet){
+                            this.tileSize = count;
+                        }
+
+                        lastChance--;
+
+                        if(lastChance < 0){
+                        endOfLine = true;
+                        border = count;
+                        count = 0;
+                        }
+
+                        lastChance = bitMap[v].length;
+
+                    }
+
+
+                } else {
+
+                    this.firstBorderBlack = border;
+
+                    if(        nextPixel(1, v, w,1,1)
+                            && nextPixel(0, v, w+border,3,2)
+                            && nextPixel(1, v, w + border + this.secondBorderWhite,1 , 3)
+                            && nextPixel(0, v, w + border + this.secondBorderWhite + this.thirdBorderBlack,1 , 4)
+                            && nextPixel(1, v, w + border + this.secondBorderWhite + this.thirdBorderBlack + this.fourthBorderWhite,1 , 5)){
+
+                        return true;
+
+                        }else{
+                            count = 0;
+                            border = 0;
+                            endOfLine = false;
+                        }
+
+                    }
+
+                }
+            }
+        return false;
+    }
+
+    private boolean nextPixel(int zo, int ii, int i, int factor, int ith) {
+
+
+        int[] bitMap = this.blackWhiteMapPicture[ii];
+        boolean isNext = true;
+        int b = this.border;
+        if(b*factor+i + 2*factor > bitMap.length){
+            return false;
+        }
+
+        for(int g = i; g < i + b*factor + 2*factor; g++) {
+
+            isNext = bitMap[g] == zo;
+
+            if (g <= 2*factor) {
+
+                if (!isNext){
+                    if(ith == 1){
+                    this.secondBorderWhite = g;}
+                    else if(ith == 2){
+                        this.thirdBorderBlack = g;
+                    } else if (ith == 3) {
+                        this.fourthBorderWhite = g;
+                    }else{
+                    }
+                    return true;
+                }
+
+            }else{
+                if(isNext){
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean detect_vertical(int[][] bitMap, int startstart, int start, int stopstop, int stop){
+        int[][] newBitMap = new int[bitMap.length][bitMap[0].length];
+        for(int i = 0; i < bitMap.length; i++){
+            for (int ii = 0; ii < bitMap[i].length; ii++){
+                newBitMap[ii][i] = bitMap[i][ii]; //this should flip the bitMap by 90 degree right?
+            }
+        }
+        return detect_horizontal(newBitMap, startstart, start, stopstop, stop);
+    }
+
+
+    private boolean detect_diags(int[][]bitMap, int startstart, int start){
+
+        //flip the array by 45°
+        float fall = (float)bitMap.length / (float) bitMap[0].length;
+
+        int[][] diag_arr;
+
+        int[][] bitMapNew = new int[bitMap[0].length][bitMap.length];
+        for (int k = 0; k < bitMap.length; k++){
+            for(int l = 0; l < bitMap[0].length; l++){
+                bitMapNew[k][l] = bitMap[l][k];
+            }
+        }
+
+        if((float) (int) fall == fall){ //if fall is smaller than 1 (array is wider than tall, then an int fall will only occur, if the array doesn't have elements in it, so this case is irrelevant here)
+            diag_arr = mk_diag_arr(bitMap.length, (int) fall);
+            int[][][] divided_fall = new int[bitMapNew.length][bitMapNew.length/(int)fall][(int) fall];
+            int fall_c = 0;
+            int pos = 0;
+
+            for(int m = 0; m < bitMapNew.length; m++){
+                for(int n = 0; n < bitMapNew[0].length; n++){
+                    if(fall_c > fall){
+                        fall_c = 0;
+                        pos++;
+                    }
+                    divided_fall[m][pos][fall_c] = bitMapNew[m][n];
+                    fall_c++;
+                }
+            }
+
+
+
+            for(int a = 0; a < divided_fall.length; a++){
+                for(int b = 0; b < divided_fall[0].length; b++){
+                    for(int c = 0; c < fall; c++){
+                        diag_arr[indexX((a* divided_fall[0].length+b*(int) fall+c)/(int)fall)][indexY((a* divided_fall[0].length+b*(int) fall+c)/(int)fall)] = divided_fall[a][b][c];
+                    }
+                }
+            }
+
+
+        }
+        else {
+
+            if(fall < 1.0){
+                int[][] new_arr = new int[bitMap.length][bitMap[0].length];
+                for(int i = 0; i < bitMap.length; i++){
+
+                    for(int j = 0; j < bitMap[0].length; j++){
+
+                        new_arr[i][j] = bitMap[j][i];
+                    }
+                }
+
+                bitMap = new_arr;
+            }
+
+            int maxDiag = bitMap[0].length;
+            diag_arr = mk_uneven_diag_arr(maxDiag, bitMap.length);
+
+            int[] aio = new int[bitMap.length*bitMap[bitMap.length/2].length];
+            int x = 0;
+            for(int[] bitM: bitMap){
+
+                for(int bit: bitM){
+
+                    aio[x] = bit;
+                    x++;
+                }
+            }
+            x = 0;
+
+            boolean findOut = true;
+            int t = 0;
+            while(findOut) {
+                if(binlog(t) >= maxDiag) {
+                    findOut = false;
+                }
+                t++;
+            }
+
+            while(x < aio.length) {
+
+                int[] coord = getXY(x,maxDiag, aio.length,t);
+                diag_arr[coord[0]][coord[1]] = aio[x];
+                x++;
+            }
+
+
+        }
+
+
+        if (detect_horizontal( diag_arr, startstart, start, diag_arr.length, diag_arr[diag_arr.length/2].length)){
+            if(detect_vertical(diag_arr, startstart, start, diag_arr.length, diag_arr[diag_arr.length/2].length)){
+                this.diag = true;
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private int[] getXY(int num, int maxDiag, int maxX, int x) {
+
+
+        if(binlog(num) < maxDiag){
+            return new int[]{binlog(num), indexY(num)};
+        }
+        else if (num < maxX - x) {
+            return new int[]{((num-x) /maxDiag) + maxDiag, ((num-x) %maxDiag)}; //this should be correct...right?
+        }else {
+           return new int[]{binlog(maxX - num), indexY(maxX-num)};
+        }
+
+
+        /*
+        0 [0,0]
+        1 [1,0]
+        2 [1,1]
+        3 [2,0]
+        4 [2,1]
+        5 [2,2]
+        6 [3,0]
+        ... until x, where x is the num, where coord[0] == maxDiag, or binlog(x) == maxDiag
+        x+0 [(x+0)-x/maxDiag][(x+0)-x%maxDiag]
+        ... until x+y, where y is the number, where the last maxDiag long line is.
+        basically reverse the stuff from before maxDiag len was reached, but add maxDiag + y-x/maxDiag that is X, Y is complicated
+         */
+    }
+
+    private int[][] mk_uneven_diag_arr(int maxDiag, int len) {
+
+
+        int[][] arr = new int[maxDiag + len-1][]; //maxDiag + len - 1 - maxDiag - 1 +maxDiag = maxDiag + len-1-1 as length of arr of arrs
+
+
+        for(int i = 0; i < maxDiag; i++){
+            arr[i] = new int[i+1];
+        }
+
+
+        for(int i = 0; i < len-maxDiag; i++){
+            arr[i+maxDiag] = new int[maxDiag];
+        }
+
+        int counter = len-1;
+
+        for(int i = maxDiag; i > 0; i-- ){
+            arr[counter] = new int[i];
+            counter++;
+        }
+        return arr;
+    }
+
+
+
+
+    private int indexY(int d) {
+
+        int count = 0;
+        if(d == 2){
+            return 1;
+        }
+        for(int i = 0; i < d; i++){
+            for (int j = 0; j<i;j++){
+                if(count == d){
+                    return j;
+                }
+                count++;
+            }
+        }
+        return 0;
+    }
+
+    private int indexX(int d) {
+        if(d==0){
+            return 0;
+        }
+        return binlog(d);
+    }
+
+    public static int binlog( int bits ) // returns 0 for bits=0
+    {
+        int log = 0;
+        if( ( bits & 0xffff0000 ) != 0 ) { bits >>>= 16; log = 16; }
+        if( bits >= 256 ) { bits >>>= 8; log += 8; }
+        if( bits >= 16  ) { bits >>>= 4; log += 4; }
+        if( bits >= 4   ) { bits >>>= 2; log += 2; }
+        return log + ( bits >>> 1 );
+    }
+
+    private int[][] mk_diag_arr(int len, int fall) {
+        int[][] arr = new int[len][];
+
+        for(int i = 0; i < len/2; i++){
+            arr[i] = new int[(i+1)*fall];
+        }
+
+        for(int i = (len/2)+1; i < len ; i++){
+            arr[i] = new int[(len-i+1)*fall];
+        }
+
+        return arr;
+    }
+
+    private boolean isQRInArr(int[][] bitMap){
+
+        if(detect_horizontal(bitMap,0,0, bitMap.length, bitMap[0].length)){
+            int middleX,startstart,start,dist;
+            middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack)/2;
+            dist = this.secondBorderWhite - this.firstBorderBlack;
+            startstart = firstBorderBlack-dist;
+            start = middleX -3*dist+1 - (dist*3)/2; //middleX is actually middleY lol
+            int stopstop = bitMap[bitMap.length/2].length; //X and Y coords are confusing lmao
+            int stop = middleX + 3*dist+1 - (dist*3)/2; //dist+1 to account for diagonal view of camera (perspective)
+            if(detect_vertical(bitMap,startstart,start,stopstop,stop)){
+
+                for(int i = 5; i < 161; i+=4) {
+
+                    this.qrSize = i;
+                    //first marker found yay :D
+                    boolean up, down, left, right;
+                    up = detect_horizontal(bitMap, startstart + dist * i, start, start + dist*(i+1), bitMap[bitMap.length/2].length);
+                    down = detect_horizontal(bitMap, startstart - dist * i, start,start - dist*(i+1), bitMap[bitMap.length/2].length);
+                    left = detect_horizontal(bitMap, startstart, start - dist * i, bitMap.length, startstart - dist*(i+1));
+                    right = detect_horizontal(bitMap, startstart, start + dist * i, bitMap.length, startstart + dist*(i+1));
+
+
+                    if (up && left) { //for efficiency reasons, i will only scan horizontally after the first marker was verified
+
+                        //qr code verified, set read-starting coords and return true
+                        this.rotation = 180;
+                        detect_horizontal(bitMap, startstart + dist * i, start, start + dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                        middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                        start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                        this.startX = start + dist * i;
+                        detect_horizontal(bitMap, startstart, start - dist * i, bitMap.length, startstart - dist*(i+1));
+                        startstart = firstBorderBlack - dist;     //Y
+                        this.startY = startstart - dist * i;
+                        return true;
+
+                    } else if (up & right) {
+
+                        this.rotation = 90; //flip to right later
+                        //qr code verified, set read-starting coords and return true
+                        detect_horizontal(bitMap, startstart + dist * i, start, start + dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                        middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                        start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                        this.startX = start + dist * i;
+                        detect_horizontal(bitMap, startstart, start + dist * i, bitMap.length, startstart + dist*(i+1));
+                        startstart = firstBorderBlack - dist;     //Y
+                        this.startY = startstart + dist * i;
+                        return true;
+
+                    } else if (left & down) {
+
+                        this.rotation = -90; //flip to left later
+                        //qr code verified, set read-starting coords and return true
+                        detect_horizontal(bitMap, startstart - dist * i, start,start - dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                        middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                        start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                        this.startX = start - dist * i;
+                        detect_horizontal(bitMap, startstart, start - dist * i, bitMap.length, startstart - dist*(i+1));
+                        startstart = firstBorderBlack - dist;     //Y
+                        this.startY = startstart - dist *i;
+                        return true;
+
+                    } else if (right & down) {
+
+                        this.rotation = 0; //no need to flip out :D
+                        //qr code verified, set read-starting coords and return true
+                        detect_horizontal(bitMap, startstart - dist * i, start,start - dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                        middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                        start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                        this.startX = start - dist * i;
+                        detect_horizontal(bitMap, startstart, start + dist * i, bitMap.length, startstart + dist*(i+1));
+                        startstart = firstBorderBlack - dist;     //Y
+                        this.startY = startstart + dist * i;
+                        return true;
+                        //this should match any case, in that a qr code is findable and set the coords according
+                    }
+
+                }
+            }
+
+                //if all this didn't find a qr code, then try diagonal
+        }else{
+            //check diags
+            if(detect_diags(bitMap,0,0)){
+
+                int middleX,startstart,start,dist;
+                middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack)/2;
+                dist = this.secondBorderWhite - this.firstBorderBlack;
+                startstart = firstBorderBlack-dist;
+                start = middleX -3*dist - (dist*3)/2;
+
+                if(detect_diags(flipBitMap(bitMap), startstart, start)){
+                    for(int i = 5; i < 161; i+=4) {
+
+                        this.qrSize = i;
+                        //first marker found yay :D
+                        boolean up, down, left, right;
+                        up = detect_horizontal(bitMap, startstart + dist * i, start, start + dist*(i+1), bitMap[bitMap.length/2].length);
+                        down = detect_horizontal(bitMap, startstart - dist * i, start,start - dist*(i+1), bitMap[bitMap.length/2].length);
+                        left = detect_horizontal(bitMap, startstart, start - dist * i, bitMap.length, startstart - dist*(i+1));
+                        right = detect_horizontal(bitMap, startstart, start + dist * i, bitMap.length, startstart + dist*(i+1));
+
+
+                        if (up && left) { //for efficiency reasons, i will only scan horizontally after the first marker was verified
+
+                            //qr code verified, set read-starting coords and return true
+                            detect_horizontal(bitMap, startstart + dist * i, start, start + dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                            middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                            start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                            this.startX = start + dist * i;
+                            detect_horizontal(bitMap, startstart, start - dist * i, bitMap.length, startstart - dist*(i+1));
+                            startstart = firstBorderBlack - dist;     //Y
+                            this.startY = startstart - dist * i;
+                            return true;
+
+                        } else if (up & right) {
+
+                            //qr code verified, set read-starting coords and return true
+                            detect_horizontal(bitMap, startstart + dist * i, start, start + dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                            middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                            start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                            this.startX = start + dist * i;
+                            detect_horizontal(bitMap, startstart, start + dist * i, bitMap.length, startstart + dist*(i+1));
+                            startstart = firstBorderBlack - dist;     //Y
+                            this.startY = startstart + dist *i;
+                            return true;
+
+                        } else if (left & down) {
+
+                            //qr code verified, set read-starting coords and return true
+                            detect_horizontal(bitMap, startstart - dist * i, start,start - dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                            middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                            start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                            this.startX = start - dist * i;
+                            detect_horizontal(bitMap, startstart, start - dist * i, bitMap.length, startstart - dist*(i+1));
+                            startstart = firstBorderBlack - dist;     //Y
+                            this.startY = startstart - dist *i;
+                            return true;
+
+                        } else if (right & down) {
+                            //qr code verified, set read-starting coords and return true
+                            detect_horizontal(bitMap, startstart - dist * i, start,start - dist*(i+1), bitMap[bitMap.length/2].length); //this sets the borders again
+                            middleX = this.thirdBorderBlack + (this.fourthBorderWhite - this.thirdBorderBlack) / 2;
+                            start = middleX - 3 * dist - (dist * 3) / 2;   //X
+                            this.startX = start - dist * i;
+                            detect_horizontal(bitMap, startstart, start + dist * i, bitMap.length, startstart + dist*(i+1));
+                            startstart = firstBorderBlack - dist;     //Y
+                            this.startY = startstart + dist *i;
+                            return true;
+                            //this should match any case, in that a qr code is findable and set the coords according
+                        }
+                    }
+                }
+            }
+        }
+
+        //diagonal + orthogonal failed, there is no qr code. return false
+        return false;
+
+    }
+
+    private int[][] flipBitMap(int[][] bitMap){
+        int[][] arr = new int[bitMap[bitMap.length/2].length][];
+        for(int i = 0; i < bitMap.length; i++){
+            for(int j = 0; j < bitMap[i].length; j++){
+                arr[i][j] = bitMap[j][i];
+            }
+        }
+        return arr;
+    }
+
+
+}
+
+
+
+
+
+
+/*
+length - maxDiag until 0, then in row 1
+
+[01,02,03,04],
+[05,06,07,08],
+[09,10,11,12],
+[13,14,15,16],
+[17,18,19,20],
+[21,22,23,24],
+[25,26,27,28]
+
+--> fall = 1.75
+
+
+[
+[01,02,03,04],
+[05,06,07,08],
+[09,10,11,12],
+[13,14,15,16],
+[17,18,19,20],
+[21,22,23,24],
+[25,26,27,28],
+[29,30,31,32]
+] (8) Listen
+
+
+flip 90°
+divide into arrays of length fall-1, append to row-th + pos-th array of arrays
+
+
+
+
+for (x=0;x<ll;x++):
+    for(y=l;y>0;y--):
+        arr[x][y] = flip array split by fallth index, append to array in (y/fall)+xth row
+
+
+
+
+
+arr.length := l
+arr[0].length := ll
+
+x = arr.length
+for(y = 0, x > 0 ,y++):
+    arr[][] = (x-fall-y, y)
+
+
+arr[x][y] = valueOfX(m,b) ==> b= ll-fall*try
+
+
+
+
+
+
+(l-fall,0), (l-fall-1,0) , ... (l-1,0)
+(l-2*fall,0), (l-2*fall -1,0), ... (l-fall-1,0), (l-fall,1), (l-fall-1,1) , ... (l-1,1)
+...
+(0,0), (1,0), ..., (fall-1,0), (fall,1), (fall+1,1), ..., (2*fall -1,1), ..., (...), ...(l-1,ll-1)
+
+--> flip the arr by 180°
+do the indexes from above again exept the one with (0,0)
+flip the resulting arr + append to the one from the first steps
+
+--> or
+(1,0), (1,1), ..., (1,fall-1), (2,fall), ... (2,2*fall-1), ..., (...), ...(l-fall-1,ll)
+...
+(ll-2,0), (ll-2,1), ..., (ll-2,fall-1), (ll-1, fall), ..., (ll-1, fall*2-1)
+(ll-1,0), (ll-1,1), ..., (ll-1, fall-1)
+
+
+
+
+
+
+[
+[25,29],
+[17,21,26,30],
+[09,13,18,22,27,31],
+[01,05,10,14,19,23,28,32],
+[02,06,11,15,20,24],
+[03,07,12,16],
+[04,08],
+] (7) Listen
+
+
+Steigung m = delta y / delta x
+
+dabei ist delta z = koord am b - koord am a Punkt
+
+also für 1. 2d array:
+
+m = -(arr.length)/(arr[0].length)
+if m = y,x... , then one round with round up, one with down, but make sure it is fitting
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

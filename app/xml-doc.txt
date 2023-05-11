@@ -1,4 +1,0 @@
-click blue stack icon to select blueprint or design view
-bottom left side lets you switch between design + text view, text view being the raw xml data -- somehow after clicking it once, it is now in the upper right corner of the screen
-android:onClick="onBtnClick"/>
-makes the button bind to a java function in mainactivity, creates it automatically when hovered with mouse
