@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: do x
         //this will pop up in TODO, to remind of tasks
         //go to Build -> Make Project might fix warnings
-        //if android studio bugs out: Go to File -> invalidate caches/Restart...
+        //if android studio bugs out: Go to File -> invalidate caches/Restart... ok
 
 
         //Button btn = findViewById(R.id.button);
